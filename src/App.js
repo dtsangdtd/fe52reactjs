@@ -1,11 +1,24 @@
 import React from 'react';
-import logo from './logo.svg';
 import './App.css';
-import StateLessComponent from './components/StateLessComponents';
-import Home from './baiTapChiaComponent/Home';
+import BaitapChonMauXe from './BaitapChonMauXe';
+// import DemoConditionalAndState from './DemoLogin/DemoConditionalAndState';
+// import StateLessComponent from './components/StateLessComponents';
+// import ClassEvents from './HandleEvent/ClassEvents';
+// import Home from './baiTapChiaComponent/Home';
+// import DemoDataBinding from './DataBinding/DemoDataBinding';
+// import FunctionEvent from './HandleEvent/FunctionEvent';
 
 function App() {
-  return <Home />;
+  return (
+    <div>
+      {/* <Home /> */}
+      {/* <DemoDataBinding /> */}
+      {/* <FunctionEvent /> */}
+      {/* <ClassEvents /> */}
+      {/* <DemoConditionalAndState /> */}
+      <BaitapChonMauXe />
+    </div>
+  );
 }
 
 export default App;
