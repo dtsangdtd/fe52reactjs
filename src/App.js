@@ -16,7 +16,7 @@ function App() {
       {/* <FunctionEvent /> */}
       {/* <ClassEvents /> */}
       {/* <DemoConditionalAndState /> */}
-      <BaitapChonMauXe />
+      {/* <BaitapChonMauXe /> */}
     </div>
   );
 }

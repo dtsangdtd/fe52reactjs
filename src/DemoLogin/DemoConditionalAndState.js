@@ -5,6 +5,7 @@ export default class DemoConditionalAndState extends Component {
    * true : da dang nhap =>hien ten nguoi dung
    * false : chua dang nhap => hien nut login
    *      */
+  //dung state de phuong thuc render chay lai
   state = {
     isLogin: false,
   };
