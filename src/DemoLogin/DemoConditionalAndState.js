@@ -13,6 +13,7 @@ export default class DemoConditionalAndState extends Component {
   handleClick = () => {
     // this.isLogin = true;
     this.setState({ isLogin: true });
+    // state dung de lu trang thai component khac props la de truyen du lieu giu cac components
   };
   // phuong thuc cua class
   renderLogin = () => {

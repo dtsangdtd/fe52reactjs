@@ -1,10 +1,13 @@
 import React from 'react';
 import './App.css';
-import BaitapChonMauXe from './BaitapChonMauXe';
+// import DemoProps from './Props/DemoProps';
+// import BaitapChonMauXe from './BaitapChonMauXe';
+// import DemoCourse from './ListAndKeys/DemoCourse';
 // import DemoConditionalAndState from './DemoLogin/DemoConditionalAndState';
 // import StateLessComponent from './components/StateLessComponents';
 // import ClassEvents from './HandleEvent/ClassEvents';
 // import Home from './baiTapChiaComponent/Home';
+import BaitapGioHang from './BaitapGioHang/BaitapGioHang';
 // import DemoDataBinding from './DataBinding/DemoDataBinding';
 // import FunctionEvent from './HandleEvent/FunctionEvent';
 
@@ -17,6 +20,9 @@ function App() {
       {/* <ClassEvents /> */}
       {/* <DemoConditionalAndState /> */}
       {/* <BaitapChonMauXe /> */}
+      {/* <DemoCourse /> */}
+      {/* <DemoProps /> */}
+      <BaitapGioHang />
     </div>
   );
 }

@@ -3,45 +3,45 @@ import React, { Component } from 'react';
 export default class Header extends Component {
   render() {
     return (
-      <nav class='navbar navbar-expand-md navbar-dark bg-dark'>
-        <div class='container-fluid'>
-          <a href='#' class='navbar-brand'>
+      <nav className='navbar navbar-expand-md navbar-dark bg-dark'>
+        <div className='container-fluid'>
+          <a href='#' className='navbar-brand'>
             CyberSoft
           </a>
           <button
-            class='navbar-toggler'
+            className='navbar-toggler'
             data-toggle='collapse'
             data-target='#myMenu'
           >
-            <span class='navbar-toggler-icon'></span>
+            <span className='navbar-toggler-icon' />
           </button>
-          <div class='collapse navbar-collapse' id='myMenu'>
-            <ul class='navbar-nav ml-auto'>
-              <li class='nav-item'>
-                <a href='#' class='nav-link active'>
+          <div className='collapse navbar-collapse' id='myMenu'>
+            <ul className='navbar-nav ml-auto'>
+              <li className='nav-item'>
+                <a href='#' className='nav-link active'>
                   Home
                 </a>
               </li>
-              <li class='nav-item'>
-                <a href='#' class='nav-link'>
+              <li className='nav-item'>
+                <a href='#' className='nav-link'>
                   News
                 </a>
               </li>
-              <li class='nav-item dropdown'>
-                <a href='#' class='nav-link' data-toggle='dropdown'>
+              <li className='nav-item dropdown'>
+                <a href='#' className='nav-link' data-toggle='dropdown'>
                   Products
                 </a>
-                <div class='dropdown-menu'>
-                  <a href='#' class='dropdown-item'>
+                <div className='dropdown-menu'>
+                  <a href='#' className='dropdown-item'>
                     Smarphone
                   </a>
-                  <a href='#' class='dropdown-item'>
+                  <a href='#' className='dropdown-item'>
                     Laptop
                   </a>
                 </div>
               </li>
-              <li class='nav-item'>
-                <a href='#' class='nav-link'>
+              <li className='nav-item'>
+                <a href='#' className='nav-link'>
                   Forum
                 </a>
               </li>
