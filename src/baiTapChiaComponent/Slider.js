@@ -5,8 +5,8 @@ export default function Slider() {
     <div id='demo' className='carousel slide' data-ride='carousel'>
       <ul className='carousel-indicators'>
         <li data-target='#demo' data-slide-to={0} className='active' />
-        <li data-target='#demo' data-slide-to={1} className />
-        <li data-target='#demo' data-slide-to={2} className />
+        <li data-target='#demo' data-slide-to={1} />
+        <li data-target='#demo' data-slide-to={2} />
       </ul>
       <div className='carousel-inner'>
         <div className='carousel-item active'>
