@@ -6,12 +6,24 @@ export default function CartItem(props) {
       <td>{props.cart.maSanPham}</td>
       <td>{props.cart.tenSanPham}</td>
       <td>
-        <img src={props.cart.hinhAnh} width={50} alt />
+        <img src={props.cart.hinhAnh} width={50} />
       </td>
       <td>
-        <button>-</button>
+        <button
+          onClick={() => {
+            props.handleIncrement(props.cart, false);
+          }}
+        >
+          -
+        </button>
         {props.cart.soLuong}
-        <button>+</button>
+        <button
+          onClick={() => {
+            props.handleIncrement(props.cart, true);
+          }}
+        >
+          +
+        </button>
       </td>
       <td>{props.cart.giaban}</td>
       <td>{props.cart.giaban * props.cart.soLuong} </td>

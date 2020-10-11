@@ -107,6 +107,41 @@ export default class BaitapGioHang extends Component {
     });
     this.setState({ danhSachGioHang });
   };
+  handleIncrement = (cart, status) => {
+    // 1lay mang gio hang
+    // 2tim vi tri cua phan tu duoc nhan
+    // 3 check xem tang hay giam
+    // 4 cap nhat lai state
+    let { danhSachGioHang } = this.state;
+    const index = danhSachGioHang.findIndex((item) => {
+      return item.maSanPham === cart.maSanPham;
+    });
+    if (index !== -1) {
+      status
+        ? danhSachGioHang[index].soLuong++
+        : danhSachGioHang[index].soLuong <= 1
+        ? alert('khong duoc giam')
+        : danhSachGioHang[index].soLuong--;
+      // if (status) {
+      //   danhSachGioHang[index].soLuong++;
+      // } else {
+      //   danhSachGioHang[index].soLuong <= 1
+      //     ? alert('khong duoc giam')
+      //     : danhSachGioHang[index].soLuong--;
+      // }
+    }
+    this.setState({
+      danhSachGioHang,
+    });
+    console.log(cart, status);
+  };
+  renderTotal = () => {
+    let { danhSachGioHang } = this.state;
+    let total = danhSachGioHang.reduce((tong, cartHienTai) => {
+      return (tong += cartHienTai.soLuong);
+    }, 0);
+    return total;
+  };
   renderDanhSachSanPham = () => {
     return this.danhSachSanPham.map((sanPham, index) => {
       return (
@@ -132,7 +167,7 @@ export default class BaitapGioHang extends Component {
               data-toggle='modal'
               data-target='#modelId'
             >
-              Giỏ hàng (10)
+              Giỏ hàng : {this.renderTotal()}
             </button>
           </div>
           <div className='container'>
@@ -142,6 +177,7 @@ export default class BaitapGioHang extends Component {
             <Model
               danhSachGioHang={this.state.danhSachGioHang}
               handleDelete={this.handleDelete}
+              handleIncrement={this.handleIncrement}
             />
           </div>
           <div className='row'>
