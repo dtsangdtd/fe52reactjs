@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
+import Model from './Model';
 import SanPham from './SanPham';
 /**
  * các bước thực hiện
  * 1/dàn layout
  * 2/xát đinh data thây đổi và lưu vào state
  * 3/lấy data trong state đi binding ra jsx
- * 4/render mảng dữ liệu
+ * 4/render mảng dữ liệu done
  * 5/xây dựng chức năng xem chi tiết
  * 6/xây dựng chức năng thêm giỏ hàng
  * 7/xóa sản phẩm khổi giỏ hàng
@@ -15,6 +16,7 @@ import SanPham from './SanPham';
 export default class BaitapGioHang extends Component {
   danhSachSanPham = [
     {
+      giaban: 392984,
       maSanPham: '1',
       tenSanPham: `vinsmart`,
       hinhAnh: './img/vsphone.jpg',
@@ -26,6 +28,7 @@ export default class BaitapGioHang extends Component {
       rom: `120 GB`,
     },
     {
+      giaban: 900000,
       maSanPham: '2',
       tenSanPham: `meizuphone`,
       hinhAnh: './img/meizuphone.jpg',
@@ -37,6 +40,7 @@ export default class BaitapGioHang extends Component {
       rom: `64 GB`,
     },
     {
+      giaban: 1222000,
       maSanPham: '3',
       tenSanPham: `apple phone`,
       hinhAnh: './img/applephone.jpg',
@@ -50,6 +54,7 @@ export default class BaitapGioHang extends Component {
   ];
   state = {
     sanPhamChiTiet: {
+      giaban: 150000,
       maSanPham: '1',
       tenSanPham: `apple phone`,
       hinhAnh: './img/meizuphone.jpg',
@@ -60,12 +65,58 @@ export default class BaitapGioHang extends Component {
       ram: `4 GB`,
       rom: `1000 GB`,
     },
+    danhSachGioHang: [],
+  };
+  handleAddSanPham = (sanPham) => {
+    // console.log(sanPham);
+    let danhSachGioHang = [...this.state.danhSachGioHang];
+    /**tim xem co ton tai trong mang hay khong  */
+    /**neu co ton tai tra ve index
+     * ne khong ton tai tra ve -1
+     */
+    const index = danhSachGioHang.findIndex((cart) => {
+      return cart.maSanPham === sanPham.maSanPham;
+    });
+    if (index !== -1) {
+      danhSachGioHang[index].soLuong++;
+    } else {
+      sanPham.soLuong = 1;
+      danhSachGioHang = [...danhSachGioHang, sanPham];
+    }
+    // danhSachGioHang.push(sanPham);
+    // setState;
+    this.setState(
+      {
+        danhSachGioHang,
+      },
+      () => {
+        console.log(this.state.danhSachGioHang);
+      }
+    );
+  };
+
+  handleDetail = (sanPham) => {
+    this.setState({
+      sanPhamChiTiet: sanPham,
+    });
+  };
+  handleDelete = (cart) => {
+    let danhSachGioHang = this.state.danhSachGioHang;
+    danhSachGioHang = danhSachGioHang.filter((item) => {
+      return cart.maSanPham !== item.maSanPham;
+    });
+    this.setState({ danhSachGioHang });
   };
   renderDanhSachSanPham = () => {
     return this.danhSachSanPham.map((sanPham, index) => {
       return (
         <div key={index} className='col-sm-4'>
-          <SanPham />
+          <SanPham
+            handleDetail={this.handleDetail}
+            /* (is props)  (gọi phương thức handleDetail)*/
+            sanPham={sanPham}
+            handleAddSanPham={this.handleAddSanPham}
+          />
         </div>
       );
     });
@@ -87,91 +138,11 @@ export default class BaitapGioHang extends Component {
           <div className='container'>
             <div className='row'>{this.renderDanhSachSanPham()}</div>
           </div>
-          <div
-            className='modal fade'
-            id='modelId'
-            tabIndex={-1}
-            aria-labelledby='modelTitleId'
-            aria-hidden='true'
-            style={{ display: 'none' }}
-          >
-            <div
-              className='modal-dialog'
-              role='document'
-              style={{ maxWidth: 1000 }}
-            >
-              <div className='modal-content'>
-                <div className='modal-header'>
-                  <h5 className='modal-title'>Giỏ hàng</h5>
-                  <button
-                    type='button'
-                    className='close'
-                    data-dismiss='modal'
-                    aria-label='Close'
-                  >
-                    <span aria-hidden='true'>×</span>
-                  </button>
-                </div>
-                <div className='modal-body'>
-                  <table className='table'>
-                    <thead>
-                      <tr>
-                        <th>Mã sản phẩm</th>
-                        <th>tên sản phẩm</th>
-                        <th>hình ảnh</th>
-                        <th>số lượng</th>
-                        <th>đơn giá</th>
-                        <th>thành tiền</th>
-                      </tr>
-                    </thead>
-                    <tbody>
-                      <tr>
-                        <td>1</td>
-                        <td>Meizu 16Xs</td>
-                        <td>
-                          <img src='./img/meizuphone.jpg' width={50} />
-                        </td>
-                        <td>
-                          <button>-</button>5<button>+</button>
-                        </td>
-                        <td>7600000</td>
-                        <td>38000000</td>
-                        <td>
-                          <button className='btn btn-danger'>Delete</button>
-                        </td>
-                      </tr>
-                      <tr>
-                        <td>2</td>
-                        <td>Iphone XS Max</td>
-                        <td>
-                          <img src='./img/applephone.jpg' width={50} />
-                        </td>
-                        <td>
-                          <button>-</button>5<button>+</button>
-                        </td>
-                        <td>27000000</td>
-                        <td>135000000</td>
-                        <td>
-                          <button className='btn btn-danger'>Delete</button>
-                        </td>
-                      </tr>
-                    </tbody>
-                  </table>
-                </div>
-                <div className='modal-footer'>
-                  <button
-                    type='button'
-                    className='btn btn-secondary'
-                    data-dismiss='modal'
-                  >
-                    Close
-                  </button>
-                  <button type='button' className='btn btn-primary'>
-                    Save
-                  </button>
-                </div>
-              </div>
-            </div>
+          <div>
+            <Model
+              danhSachGioHang={this.state.danhSachGioHang}
+              handleDelete={this.handleDelete}
+            />
           </div>
           <div className='row'>
             <div className='col-sm-5'>
