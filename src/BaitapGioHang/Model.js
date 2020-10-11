@@ -9,6 +9,7 @@ export default class Model extends Component {
           handleDelete={this.props.handleDelete}
           key={index}
           cart={cart}
+          handleIncrement={this.props.handleIncrement}
         />
       );
     });
