@@ -1,28 +1,40 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as serviceWorker from './serviceWorker';
-import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
-import '../node_modules/bootstrap/dist/js/bootstrap';
-import '../node_modules/jquery/dist/jquery.slim';
-import '../node_modules/popper.js/dist/umd/popper';
-// setup redux
-import { createStore } from 'redux';
-import { Provider } from 'react-redux';
-import rootReducers from './redux/reducers';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./index.css";
+import App from "./App";
+import * as serviceWorker from "./serviceWorker";
+
+// css
+import "../node_modules/bootstrap/dist/css/bootstrap.min.css";
+// js
+import "../node_modules/bootstrap/dist/js/bootstrap.min";
+import "../node_modules/jquery/dist/jquery.slim.min";
+import "../node_modules/popper.js/dist/umd/popper.min";
+
+import { createStore } from "redux";
+import { Provider } from "react-redux";
+import rootReducer from "./redux/reducers";
+
 const store = createStore(
-  rootReducers,
+  rootReducer,
   window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 );
 
+// document.getElementById("root").innerHTML = `
+//   <React.StrictMode>
+//     <App />
+//   </React.StrictMode>
+// `;
+
 ReactDOM.render(
-  <React.StrictMode>
-    <Provider store={store}>
-      <App />
-    </Provider>
-  </React.StrictMode>,
-  document.getElementById('root')
+  // nội dung in ra html
+  // <React.StrictMode>
+  <Provider store={store}>
+    <App />
+  </Provider>,
+  // </React.StrictMode>,
+  // vị trí in ra html
+  document.getElementById("root")
 );
 
 // If you want your app to work offline and load faster, you can change

@@ -1,243 +1,114 @@
+/**
+ * các bước thực hiện :
+ * 1. dàn layout ( html css ) - done
+ * 2. xác định data thay đổi và lưu vào state - done
+ * 3. lấy data trong state đi binding ra jsx - done
+ * 4. render mãng dử liệu - done
+ * 5. xây dựng chức năng xem chi tiết - done
+ * 6. xây dựng chức năng thêm giỏ hàng - done
+ * 7. xây dựng chức năng xóa sp khoải giỏ hàng - done
+ * 8. xây dựng chức năng tăng giảm số lượng
+ * 9. xây dựng chức năng hiển thị tông số sản phẩm
+ */
+
 import React, { Component } from 'react';
-import Model from './Model';
+import Modal from './Modal';
 import SanPham from './SanPham';
 import { connect } from 'react-redux';
 
-/**
- * các bước thực hiện
- * 1/dàn layout
- * 2/xát đinh data thây đổi và lưu vào state
- * 3/lấy data trong state đi binding ra jsx
- * 4/render mảng dữ liệu done
- * 5/xây dựng chức năng xem chi tiết
- * 6/xây dựng chức năng thêm giỏ hàng
- * 7/xóa sản phẩm khổi giỏ hàng
- * 8/tăng giảm số lượng sản phẩm
- * 9/xây dựng chức năng hiển thị tổng số sản phẩm
- */
-class BaitapGioHang extends Component {
-  // danhSachSanPham = [
-  //   {
-  //     giaban: 392984,
-  //     maSanPham: '1',
-  //     tenSanPham: `vinsmart`,
-  //     hinhAnh: './img/vsphone.jpg',
-  //     manHinh: `AMOLED ", FHD+ 1080 `,
-  //     heDieuHanh: `Android 9.0 (Pie)`,
-  //     cameraTruoc: `20 MP`,
-  //     cameraSau: `Chính 48 MP &amp; Phụ 8 MP, 5 MP`,
-  //     ram: `4 GB`,
-  //     rom: `120 GB`,
-  //   },
-  //   {
-  //     giaban: 900000,
-  //     maSanPham: '2',
-  //     tenSanPham: `meizuphone`,
-  //     hinhAnh: './img/meizuphone.jpg',
-  //     manHinh: `AMOLED ", FHD+ `,
-  //     heDieuHanh: `Android 9.0 (Pie)`,
-  //     cameraTruoc: `10 MP`,
-  //     cameraSau: `Chính 3 MP &amp; Phụ 9 MP, 2 MP`,
-  //     ram: `18 GB`,
-  //     rom: `64 GB`,
-  //   },
-  //   {
-  //     giaban: 1222000,
-  //     maSanPham: '3',
-  //     tenSanPham: `apple phone`,
-  //     hinhAnh: './img/applephone.jpg',
-  //     manHinh: `AMOLED ", FHD+ 2232 x 1080 pixels`,
-  //     heDieuHanh: `IOS`,
-  //     cameraTruoc: `21 MP`,
-  //     cameraSau: `Chính 100 MP &amp; Phụ 2 MP, 5 MP`,
-  //     ram: `9 GB`,
-  //     rom: `64GB`,
-  //   },
-  // ];
-  state = {
-    // sanPhamChiTiet: {
-    //   giaban: 150000,
-    //   maSanPham: '1',
-    //   tenSanPham: `apple phone`,
-    //   hinhAnh: './img/meizuphone.jpg',
-    //   manHinh: `AMOLED ", FHD+ 2232 x 1080 pixels`,
-    //   heDieuHanh: `Android 9.0 (Pie)`,
-    //   cameraTruoc: `20 MP`,
-    //   cameraSau: `Chính 48 MP &amp; Phụ 8 MP, 5 MP`,
-    //   ram: `4 GB`,
-    //   rom: `1000 GB`,
-    // },
-    danhSachGioHang: [],
-  };
-  handleAddSanPham = (sanPham) => {
-    // console.log(sanPham);
-    let danhSachGioHang = [...this.state.danhSachGioHang];
-    /**tim xem co ton tai trong mang hay khong  */
-    /**neu co ton tai tra ve index
-     * ne khong ton tai tra ve -1
-     */
-    const index = danhSachGioHang.findIndex((cart) => {
-      return cart.maSanPham === sanPham.maSanPham;
+class BaiTapGioHang extends Component {
+  renderDanhSachSanPham = () => {
+    return this.props.danhSachSanPham.map((sanPham, index) => {
+      return (
+        <div className='col-sm-4' key={index}>
+          <SanPham sanPham={sanPham} />
+        </div>
+      );
     });
-    if (index !== -1) {
-      danhSachGioHang[index].soLuong++;
-    } else {
-      sanPham.soLuong = 1;
-      danhSachGioHang = [...danhSachGioHang, sanPham];
-    }
-    // danhSachGioHang.push(sanPham);
-    // setState;
-    this.setState(
-      {
-        danhSachGioHang,
-      },
-      () => {
-        console.log(this.state.danhSachGioHang);
-      }
-    );
   };
 
-  handleDetail = (sanPham) => {
-    this.setState({
-      sanPhamChiTiet: sanPham,
-    });
-  };
-  handleDelete = (cart) => {
-    let danhSachGioHang = this.state.danhSachGioHang;
-    danhSachGioHang = danhSachGioHang.filter((item) => {
-      return cart.maSanPham !== item.maSanPham;
-    });
-    this.setState({ danhSachGioHang });
-  };
-  handleIncrement = (cart, status) => {
-    // 1lay mang gio hang
-    // 2tim vi tri cua phan tu duoc nhan
-    // 3 check xem tang hay giam
-    // 4 cap nhat lai state
-    let { danhSachGioHang } = this.state;
-    const index = danhSachGioHang.findIndex((item) => {
-      return item.maSanPham === cart.maSanPham;
-    });
-    if (index !== -1) {
-      status
-        ? danhSachGioHang[index].soLuong++
-        : danhSachGioHang[index].soLuong <= 1
-        ? alert('khong duoc giam')
-        : danhSachGioHang[index].soLuong--;
-      // if (status) {
-      //   danhSachGioHang[index].soLuong++;
-      // } else {
-      //   danhSachGioHang[index].soLuong <= 1
-      //     ? alert('khong duoc giam')
-      //     : danhSachGioHang[index].soLuong--;
-      // }
-    }
-    this.setState({
-      danhSachGioHang,
-    });
-    console.log(cart, status);
-  };
   renderTotal = () => {
-    let { danhSachGioHang } = this.state;
+    let { danhSachGioHang } = this.props;
     let total = danhSachGioHang.reduce((tong, cartHienTai) => {
       return (tong += cartHienTai.soLuong);
     }, 0);
     return total;
   };
-  renderDanhSachSanPham = () => {
-    return this.props.danhSachSanPham.map((sanPham, index) => {
-      return (
-        <div key={index} className='col-sm-4'>
-          <SanPham
-            // handleDetail={this.handleDetail}
-            /* (is props)  (gọi phương thức handleDetail)*/
-            sanPham={sanPham}
-            // handleAddSanPham={this.handleAddSanPham}
-            // REDUX
-          />
-        </div>
-      );
-    });
-  };
+
   render() {
     return (
       <div>
-        <section className='container'>
-          <h3 className='title text-center'>Bài tập giỏ hàng</h3>
-          <div className='container text-center my-2'>
-            <button
-              className='btn btn-danger '
-              data-toggle='modal'
-              data-target='#modelId'
-            >
-              Giỏ hàng : {this.renderTotal()}
-            </button>
-          </div>
-          <div className='container'>
-            <div className='row'>{this.renderDanhSachSanPham()}</div>
-          </div>
-          <div>
-            <Model
-              // danhSachGioHang={this.state.danhSachGioHang}
-              // handleDelete={this.handleDelete}
-              handleIncrement={this.handleIncrement}
-            />
-          </div>
-          <hr></hr>
-          <br></br>
-          <div className='row'>
-            <div className='col-sm-5'>
-              <img
-                className='img-fluid'
-                src={this.props.sanPhamChiTiet.hinhAnh}
-              />
+        <div>
+          <section className='container'>
+            <h3 className='title text-center'>Bài tập giỏ hàng</h3>
+            <div className='container text-center my-2'>
+              <button
+                className='btn btn-danger '
+                data-toggle='modal'
+                data-target='#modelId'
+              >
+                Giỏ hàng : {this.renderTotal()}
+              </button>
             </div>
-
-            <div className='col-sm-7'>
-              <h3>Thông số kỹ thuật</h3>
-
-              <table className='table'>
-                <tbody>
-                  <tr>
-                    <td>Màn hình</td>
-                    <td>{this.props.sanPhamChiTiet.manHinh}</td>
-                  </tr>
-                  <tr>
-                    <td>Hệ điều hành</td>
-                    <td>{this.props.sanPhamChiTiet.heDieuHanh}</td>
-                  </tr>
-                  <tr>
-                    <td>Camera trước</td>
-                    <td>{this.props.sanPhamChiTiet.cameraTruoc}</td>
-                  </tr>
-                  <tr>
-                    <td>Camera sau</td>
-                    <td>{this.props.sanPhamChiTiet.cameraSau}</td>
-                  </tr>
-                  <tr>
-                    <td>RAM</td>
-                    <td>{this.props.sanPhamChiTiet.ram}</td>
-                  </tr>
-                  <tr>
-                    <td>ROM</td>
-                    <td>{this.props.sanPhamChiTiet.rom}</td>
-                  </tr>
-                </tbody>
-              </table>
+            <div className='container'>
+              <div className='row'>{this.renderDanhSachSanPham()}</div>
             </div>
-          </div>
-        </section>
+            <Modal />
+            <div className='row'>
+              <div className='col-sm-5'>
+                <img
+                  className='img-fluid'
+                  src={this.props.sanPhamChiTiet.hinhAnh}
+                  alt
+                />
+              </div>
+              <div className='col-sm-7'>
+                <h3>Thông số kỹ thuật</h3>
+                <table className='table'>
+                  <tbody>
+                    <tr>
+                      <td>Màn hình</td>
+                      <td>{this.props.sanPhamChiTiet.manHinh}</td>
+                    </tr>
+                    <tr>
+                      <td>Hệ điều hành</td>
+                      <td>{this.props.sanPhamChiTiet.heDieuHanh}</td>
+                    </tr>
+                    <tr>
+                      <td>Camera trước</td>
+                      <td>{this.props.sanPhamChiTiet.cameraSau}</td>
+                    </tr>
+                    <tr>
+                      <td>Camera sau</td>
+                      <td>{this.props.sanPhamChiTiet.cameraSau}</td>
+                    </tr>
+                    <tr>
+                      <td>RAM</td>
+                      <td>{this.props.sanPhamChiTiet.ram}</td>
+                    </tr>
+                    <tr>
+                      <td>ROM</td>
+                      <td>{this.props.sanPhamChiTiet.rom}</td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+            </div>
+          </section>
+        </div>
       </div>
     );
   }
 }
+
 const mapStateToProps = (state) => {
   return {
-    // key: value
-    // key là props cua component : value là state được lưu trữ trên store
-    danhSachSanPham: state.gioHangreducer.danhSachSanPham,
-    sanPhamChiTiet: state.gioHangreducer.sanPhamChiTiet,
+    // key : value
+    // key là props của component : value là state được lưu trên store
+    danhSachSanPham: state.gioHangReducer.danhSachSanPham,
+    sanPhamChiTiet: state.gioHangReducer.sanPhamChiTiet,
+    danhSachGioHang: state.gioHangReducer.danhSachGioHang,
   };
 };
 
-export default connect(mapStateToProps)(BaitapGioHang);
+export default connect(mapStateToProps)(BaiTapGioHang);

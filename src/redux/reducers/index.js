@@ -1,8 +1,10 @@
-import { combineReducers } from 'redux';
-import gioHangreducer from './gioHangReducer';
-const rootReducers = combineReducers({
-  // reducers con
-  gioHangreducer,
+import { combineReducers } from "redux";
+import gioHangReducer from "./gioHangReducer";
+
+const rootReducer = combineReducers({
+  // reducer con
+  //   gioHangreducer : gioHangreducer,
+  gioHangReducer,
 });
 
-export default rootReducers;
+export default rootReducer;

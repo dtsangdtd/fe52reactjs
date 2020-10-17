@@ -1,0 +1,4 @@
+export const DELETE_PRODUCT = "DELETE_PRODUCT";
+export const TANG_GIAM_SL = "TANG_GIAM_SL";
+export const DETAIL_PRODUCT = "DETAIL_PRODUCT";
+export const ADD_PRODUCT = "ADD_PRODUCT";
