@@ -180,6 +180,8 @@ export default class BaitapGioHang extends Component {
               handleIncrement={this.handleIncrement}
             />
           </div>
+          <hr></hr>
+          <br></br>
           <div className='row'>
             <div className='col-sm-5'>
               <img
@@ -187,8 +189,10 @@ export default class BaitapGioHang extends Component {
                 src={this.state.sanPhamChiTiet.hinhAnh}
               />
             </div>
+
             <div className='col-sm-7'>
               <h3>Thông số kỹ thuật</h3>
+
               <table className='table'>
                 <tbody>
                   <tr>
