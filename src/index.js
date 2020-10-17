@@ -3,13 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import App from './App';
 import * as serviceWorker from './serviceWorker';
-import "../node_modules/bootstrap/dist/css/bootstrap.min.css"
-import "../node_modules/bootstrap/dist/js/bootstrap"
-import "../node_modules/jquery/dist/jquery.slim"
-import "../node_modules/popper.js/dist/umd/popper"
+import '../node_modules/bootstrap/dist/css/bootstrap.min.css';
+import '../node_modules/bootstrap/dist/js/bootstrap';
+import '../node_modules/jquery/dist/jquery.slim';
+import '../node_modules/popper.js/dist/umd/popper';
+// setup redux
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
+import rootReducers from './redux/reducers';
+const store = createStore(
+  rootReducers,
+  window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
+);
+
 ReactDOM.render(
   <React.StrictMode>
-    <App />
+    <Provider store={store}>
+      <App />
+    </Provider>
   </React.StrictMode>,
   document.getElementById('root')
 );

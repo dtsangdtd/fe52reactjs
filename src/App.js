@@ -7,7 +7,7 @@ import './App.css';
 // import StateLessComponent from './components/StateLessComponents';
 // import ClassEvents from './HandleEvent/ClassEvents';
 // import Home from './baiTapChiaComponent/Home';
-import BaitapGioHang from './BaitapGioHang/BaitapGioHang';
+import BaitapGioHangRedux from './BaitapGioHangRedux/BaitapGioHang';
 // import DemoDataBinding from './DataBinding/DemoDataBinding';
 // import FunctionEvent from './HandleEvent/FunctionEvent';
 
@@ -22,7 +22,7 @@ function App() {
       {/* <BaitapChonMauXe /> */}
       {/* <DemoCourse /> */}
       {/* <DemoProps /> */}
-      <BaitapGioHang />
+      <BaitapGioHangRedux />
     </div>
   );
 }
