@@ -1,5 +1,7 @@
-import React from "react";
-import BaiTapGioHangRedux from "./BaiTapGioHangRedux/BaiTapGioHang";
+import React from 'react';
+// import BaiTapGioHangRedux from './BaiTapGioHangRedux/BaiTapGioHang';
+import FormValidation from './form-validation';
+// import LifeCycle from './life-cycle';
 // import DemoConditionalAndState from "./DemoLogin/DemoConditionalAndState";
 // import BaiTapChonMauXe from "./BaiTapChonMauXe";
 // import DemoCourse from "./ListAndKeys/DemoCourse";
@@ -25,7 +27,9 @@ function App() {
       {/* <BaiTapChonMauXe /> */}
       {/* <DemoCourse /> */}
       {/* <DemoProps /> */}
-      <BaiTapGioHangRedux />
+      {/* <BaiTapGioHangRedux /> */}
+      <FormValidation />
+      {/* <LifeCycle /> */}
     </div>
   );
 }
